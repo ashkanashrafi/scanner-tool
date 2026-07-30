@@ -38,4 +38,4 @@ try:
     print(f"\n🔥 All {len(domains)} domains opened in Firefox!")
 
 except Exception as e:
-    print(f"❌ Error: {e}")
+    print(f"❌ Error: {e}") 
