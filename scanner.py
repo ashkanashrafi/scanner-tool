@@ -32,8 +32,12 @@ try:
         sys.exit(1)
 
     for d in domains:
-        webbrowser.get("firefox").open("https://" + d)
+        if not d.startswith("https://") and not d.startswith("http://"):
+            webbrowser.get("firefox").open("https://" + d)
+        else:
+            webbrowser.get("firefox").open(d)
         print(f"✅ Opened: {d}")
+        
     
     print(f"\n🔥 All {len(domains)} domains opened in Firefox!")
 
