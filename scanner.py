@@ -1,6 +1,5 @@
-import webbrowser
-import sys
-import os
+import webbrowser,  sys , os , requests
+
 
 print("""
 
@@ -31,12 +30,14 @@ try:
         print("❌ No domains found!")
         sys.exit(1)
 
-    for d in domains:
-        if not d.startswith("https://") and not d.startswith("http://"):
-            webbrowser.get("firefox").open("https://" + d)
-        else:
-            webbrowser.get("firefox").open(d)
-        print(f"✅ Opened: {d}")
+    for i,d in enumerate(domains,1):
+        url = d if d.startswith(("https://","http://")) else "https://"+ d
+        webbrowser.get("firefox").open(url)
+        try: 
+            status = f"({requests.get(url,timeout=3).status_code})"
+        except:
+            status = "(Down)"
+        print(f"[{i:3}]{status:>10} -> {d}")
         
     
     print(f"\n🔥 All {len(domains)} domains opened in Firefox!")
